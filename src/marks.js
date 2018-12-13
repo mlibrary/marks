@@ -147,6 +147,11 @@ export class Highlight extends Mark {
         var filtered = this.filteredRanges();
         var offset = this.element.getBoundingClientRect();
         var container = this.container.getBoundingClientRect();
+        container = { top: container.top, left: container.left };
+        // take into account padding
+        var styles = window.getComputedStyle(this.container);
+        container.left += parseInt(styles.paddingLeft);
+        container.top += parseInt(styles.paddingTop);
 
         for (var i = 0, len = filtered.length; i < len; i++) {
             var r = filtered[i];
